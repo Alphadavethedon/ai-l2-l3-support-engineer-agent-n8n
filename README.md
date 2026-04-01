@@ -20,6 +20,6 @@
 ![Google Chat](chat.png)
 ![Jira Update](jira.png)
 
-Demo video: [add your Loom link]
+Demo video: [video will be added soon]
 
 Workflow JSON included.
