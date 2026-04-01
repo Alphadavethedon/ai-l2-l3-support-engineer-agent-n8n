@@ -19,7 +19,9 @@ Canvas
 
 <img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/bce945a5-518d-4ab7-b81a-bf7e9aa52854" />
 
-![Execution](<img width="1907" height="950" alt="image" src="https://github.com/user-attachments/assets/dd64e67c-ebf8-4dba-bc11-6844c0dc5e64" />)
+Execution
+
+<img width="1907" height="950" alt="image" src="https://github.com/user-attachments/assets/dd64e67c-ebf8-4dba-bc11-6844c0dc5e64" />
 ![Google Chat](chat.png)
 ![Jira Update](jira.png)
 
