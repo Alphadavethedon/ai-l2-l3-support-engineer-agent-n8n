@@ -15,7 +15,8 @@
 - Built with only free resources
 
 ## Screenshots
-![Canvas](canvas.png)
+![Canvas](<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/e9847ec7-594e-4439-8d21-4b15aa0e8d8a" />
+)
 ![Execution](execution.png)
 ![Google Chat](chat.png)
 ![Jira Update](jira.png)
