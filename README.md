@@ -15,7 +15,8 @@
 - Built with only free resources
 
 ## Screenshots
-![Canvas]<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/bce945a5-518d-4ab7-b81a-bf7e9aa52854" />
+Canvas
+<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/bce945a5-518d-4ab7-b81a-bf7e9aa52854" />
 
 ![Execution](execution.png)
 ![Google Chat](chat.png)
