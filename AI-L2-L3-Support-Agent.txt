@@ -1,0 +1,102 @@
+{
+  "name": "AI Autonomous L2/L3 Technical Support Engineer Agent",
+  "nodes": [
+    {
+      "parameters": { "triggerInterval": 10, "triggerIntervalUnit": "minutes" },
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "code": "return [{\n  json: {\n    ticket_id: \"SUP-\" + Math.floor(10000 + Math.random() * 90000),\n    title: \"Salesforce integration failing when logging Five9 calls - Kenya site\",\n    description: \"12 agents see API timeout. Started after latest update.\",\n    priority: \"High\",\n    sla_remaining: \"1 hour 30 min\",\n    affected_tools: [\"Salesforce\", \"Five9\", \"Jira\"]\n  }\n}];"
+      },
+      "name": "Mock L2 Ticket",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": { "model": "llama-3.3-70b-8192" },
+      "name": "Groq Chat Model",
+      "type": "n8n-nodes-base.groqChatModel",
+      "typeVersion": 1,
+      "position": [680, 200]
+    },
+    {
+      "parameters": { "database": "bpo_support", "collection": "l2_memory" },
+      "name": "MongoDB Memory",
+      "type": "n8n-nodes-base.mongodb",
+      "typeVersion": 1,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "systemPrompt": "You are an AI Autonomous L2/L3 Technical Support Engineer with 7+ years experience at CCI Global-scale BPOs.\n\nAnalyze the ticket, use memory for similar past incidents, and act like a senior Technical Specialist.\n\nOutput clean HTML with:\n- Summary\n- Root Cause Hypothesis\n- Numbered Resolution Steps (Salesforce, Five9, Jira, etc.)\n- Suggested Jira update\n- Confidence level\n\nBe concise, SLA-focused, and professional."
+      },
+      "name": "AI L2/L3 Support Agent",
+      "type": "n8n-nodes-base.aiAgent",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": { "operation": "htmlToMarkdown" },
+      "name": "Markdown",
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "conditions": { "string": [{ "value1": "{{ $json.confidence }}", "operation": "equal", "value2": "High" }] }
+      },
+      "name": "IF - Auto-resolvable?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "message": "🚨 NEW L2 TICKET – AI ANALYSIS READY\n\nTicket: {{ $json.ticket_id }} - {{ $json.title }}\n\n{{ $json.markdown }}\n\nReply with exactly:\nAPPROVE → auto-update Jira\nREJECT + reason"
+      },
+      "name": "Google Chat Approval",
+      "type": "n8n-nodes-base.googleChat",
+      "typeVersion": 1,
+      "position": [1560, 500]
+    },
+    {
+      "parameters": {
+        "conditions": { "string": [{ "value1": "{{ $json.text }}", "operation": "contains", "value2": "APPROVE" }] }
+      },
+      "name": "IF - Approved?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1780, 300]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "issueKey": "{{ $json.ticket_id }}",
+        "description": "{{ $json.markdown }}\n\n✅ Resolved by AI L2 Agent after human approval"
+      },
+      "name": "Jira Update",
+      "type": "n8n-nodes-base.jiraSoftware",
+      "typeVersion": 1,
+      "position": [2000, 300]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": { "main": [[{ "node": "Mock L2 Ticket" }]] },
+    "Mock L2 Ticket": { "main": [[{ "node": "AI L2/L3 Support Agent" }]] },
+    "AI L2/L3 Support Agent": { "main": [[{ "node": "Markdown" }]] },
+    "Markdown": { "main": [[{ "node": "IF - Auto-resolvable?" }]] },
+    "IF - Auto-resolvable?": { "main": [[{ "node": "Jira Update" }], [{ "node": "Google Chat Approval" }]] },
+    "Google Chat Approval": { "main": [[{ "node": "IF - Approved?" }]] },
+    "IF - Approved?": { "main": [[{ "node": "Jira Update" }]] }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1"
+}
