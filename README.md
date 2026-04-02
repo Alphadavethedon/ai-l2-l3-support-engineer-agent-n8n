@@ -22,6 +22,8 @@ Canvas
 Execution
 
 <img width="1907" height="950" alt="image" src="https://github.com/user-attachments/assets/dd64e67c-ebf8-4dba-bc11-6844c0dc5e64" />
+<img width="1654" height="902" alt="image" src="https://github.com/user-attachments/assets/ff1442bb-87f0-4643-8275-d5b274c07d60" />
+
 ![Google Chat](chat.png)
 ![Jira Update](jira.png)
 
