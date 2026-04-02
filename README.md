@@ -1,8 +1,8 @@
-AI-Powered L2/L3 Support Automation Workflow (n8n + Grok + Jira)
+#AI-Powered L2/L3 Support Automation Workflow (n8n + Grok + Jira)
 
 This repository contains a fully automated L2/L3 Support Workflow built using n8n, Jira Cloud, and Grok AI. The solution demonstrates an enterprise-grade approach to intelligent ticket triage, automated troubleshooting, and human-in-the-loop decision-making. It is designed to reduce operational overhead, accelerate ticket resolution, and provide consistent technical analysis across IT support environments.
 
-Overview
+#Overview
 
 The workflow automatically retrieves new Jira tickets, performs multi-stage AI-driven analysis, determines whether issues are auto-resolvable, and either updates the ticket directly or requests approval from a human engineer. If escalation is required, the workflow routes the ticket to an L3 engineer with full contextual analysis.
 
@@ -34,7 +34,7 @@ Structured Output Parsing
 
 AI output is parsed from JSON into human-readable, well-formatted text suitable for ticket comments and approvals.
 
-Automated Decision Logic
+#Automated Decision Logic
 
 The workflow evaluates whether the issue is auto-resolvable based on the AI output:
 
@@ -50,7 +50,7 @@ Ticket Escalation
 
 For complex or high-risk issues, the workflow automatically assigns the ticket to a human L3 engineer with the full AI analysis attached.
 
-Architecture
+#Architecture
 
 [Schedule Trigger]
         ↓
@@ -88,7 +88,9 @@ Execution
 <img width="1654" height="902" alt="image" src="https://github.com/user-attachments/assets/ff1442bb-87f0-4643-8275-d5b274c07d60" />
 
 
-Technologies
+#Technologies
+
+
 n8n (workflow orchestration)
 Grok AI (advanced reasoning and troubleshooting)
 Jira Cloud REST API (ticket operations)
@@ -120,7 +122,9 @@ ITSM optimization and workflow consolidation
 Author
 
 Davis Wabwile
+
 Cloud & DevOps Engineer
+
 AI-Driven Automation | ITSM | Cloud Operations
 
 
